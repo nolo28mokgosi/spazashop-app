@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, TouchableNativeFeedback, Platform } from 'react-native';
 
 import Colors from "../constants/Colors";
+import Card from "./UI/Card";
 
 const ProductItem = props => {
 
@@ -10,12 +11,12 @@ const ProductItem = props => {
     {
         TouchableCmp = TouchableNativeFeedback;
     }
-   
     return(
        
-        <View style={styles.product}>
-            <View style={style.touchable}>
-             <TouchableCmp onPress={props.onViewDetail} useForeGround >
+        <Card style={styles.product}>
+            <View style={styles.touchable}>
+             <TouchableCmp onPress={props.onSelect} useForeGround >
+                 <View>
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{uri: props.image}} />
             </View>
@@ -24,25 +25,18 @@ const ProductItem = props => {
             <Text style={styles.price}>${props.price.toFixed(2)}</Text>
             </View>
             <View style={styles.actions}>
-                <Button color={Colors.Primary} title="View Details" onPress={props.onViewDetail} />
-                <Button color={Colors.Primary} title="To Cart" onPress={props.onAddToCart} />
+               {props.children}
+            </View>
             </View>
             </TouchableCmp>
             </View>
-        </View>
+        </Card>
        
     )
 };
 
 const styles = StyleSheet.create({
-    product:{
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2},
-        shadowRadius: 8,
-        elevation: 5,
-        borderRadius: 10,
-        backgroundColor: 'white',
+    product:{  
         height: 300,
         margin: 20
     },
